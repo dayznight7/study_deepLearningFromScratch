@@ -1,4 +1,6 @@
 
+import sys, os
+sys.path.append(os.pardir)
 import numpy as np
 
 
@@ -35,3 +37,22 @@ def numerical_gradient(f, x):
 
 print(partial_differentiation(function_2, np.array([3.0, 4.0]), 0))
 print(numerical_gradient(function_2, np.array([3.0, 4.0])))
+
+
+def gradient_descent(f, init_x, lr=0.01, step_num=100):
+    x = init_x
+
+    for i in range(step_num):
+        grad = numerical_gradient(f, x)
+        x -= lr * grad
+
+    return x
+
+
+init_x = np.array([-3.0, 4.0])
+print(gradient_descent(function_2, init_x=init_x, lr=0.1, step_num=100))
+init_x = np.array([-3.0, 4.0])
+print(gradient_descent(function_2, init_x=init_x, lr=1e-10, step_num=100))
+
+
+
