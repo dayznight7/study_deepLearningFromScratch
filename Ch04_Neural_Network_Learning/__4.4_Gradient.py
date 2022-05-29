@@ -2,6 +2,8 @@
 import sys, os
 sys.path.append(os.pardir)
 import numpy as np
+from common.functions import softmax, cross_entropy_error
+from common.gradient import numerical_gradient
 
 
 def function_2(x):
@@ -55,4 +57,25 @@ init_x = np.array([-3.0, 4.0])
 print(gradient_descent(function_2, init_x=init_x, lr=1e-10, step_num=100))
 
 
+class simpleNet:
 
+    def __int__(self):
+        self.W = np.random.randn(2, 3)
+
+    def predict(self, x):
+        return np.dot(x, self.W)
+
+    def loss(self, x, t):
+        z = self.predict(x)
+        y = softmax(z)
+        loss = cross_entropy_error(y, t)
+
+        return loss
+
+    def show(self):
+        print(self.W)
+
+
+
+net = simpleNet()
+net.show()
