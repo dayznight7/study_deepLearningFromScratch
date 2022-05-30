@@ -10,7 +10,7 @@ def function_2(x):
     return np.sum(x**2)
 
 
-def partial_differentiation(f, x, i):
+def my_partial_differentiation(f, x, i):
     tmp1 = x.copy()
     tmp2 = x.copy()
     h = 1e-4
@@ -19,7 +19,7 @@ def partial_differentiation(f, x, i):
     return (f(tmp1) - f(tmp2)) / (2*h)
 
 
-def numerical_gradient(f, x):
+def my_numerical_gradient(f, x):
     h = 1e-4
     grad = np.zeros_like(x)
 
@@ -37,7 +37,7 @@ def numerical_gradient(f, x):
     return grad
 
 
-print(partial_differentiation(function_2, np.array([3.0, 4.0]), 0))
+print(my_partial_differentiation(function_2, np.array([3.0, 4.0]), 0))
 print(numerical_gradient(function_2, np.array([3.0, 4.0])))
 
 
@@ -59,7 +59,7 @@ print(gradient_descent(function_2, init_x=init_x, lr=1e-10, step_num=100))
 
 class simpleNet:
 
-    def __int__(self):
+    def __init__(self):
         self.W = np.random.randn(2, 3)
 
     def predict(self, x):
@@ -72,10 +72,23 @@ class simpleNet:
 
         return loss
 
-    def show(self):
-        print(self.W)
 
-
-
+x = np.array([0.6, 0.9])
+print("x:", x)
 net = simpleNet()
-net.show()
+print("W:", net.W)
+p = net.predict(x)
+print("p = x * W:", p)
+
+print("index of max result:", np.argmax(p))
+
+#answer
+t = np.array([0, 0, 1])
+print("net.loss(x, t):", net.loss(x, t))
+
+def f(W):
+    return net.loss(x, t)
+
+
+dW = numerical_gradient(f, net.W)
+print(dW)
