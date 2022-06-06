@@ -74,21 +74,22 @@ class simpleNet:
 
 
 x = np.array([0.6, 0.9])
-print("x:", x)
+print("\nx:\n", x)
 net = simpleNet()
-print("W:", net.W)
+print("\nW:\n", net.W)
 p = net.predict(x)
-print("p = x * W:", p)
+print("\np = x * W:\n", p)
 
-print("index of max result:", np.argmax(p))
+print("\nindex of max result:\n", np.argmax(p))
 
 #answer
 t = np.array([0, 0, 1])
-print("net.loss(x, t):", net.loss(x, t))
+print("net.loss(x, t):\n", net.loss(x, t))
 
+#f = lambda w: net.loss(x, t)
 def f(W):
     return net.loss(x, t)
 
 
 dW = numerical_gradient(f, net.W)
-print(dW)
+print("\ndW:\n", dW)
