@@ -23,3 +23,20 @@ x = np.array([[1.0, -0.5], [-2.0, 3.0]])
 print(x)
 mask = (x <= 0)
 print(mask)
+
+
+class Sigmoid:
+    def __init__(self):
+        self.out = None
+
+    def forward(self, x):
+        out = 1 / (1 + np.exp(-x))
+        self.out = out
+
+        return
+
+    def backward(self, dout):
+        dx = dout * (1.0 - self.out) * self.out
+
+        return dx
+
